@@ -10,41 +10,9 @@
     <script defer src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:700" rel="stylesheet">
+    <script defer src="javascript/app.js"></script>
 
-    <style>
-        .canvas {
-            padding: 2rem 6rem;
-        }
-        
-        .jumbotron-fluid {
-            background-color: #17a2b8;
-            padding: 4rem;
-            color: white;
-            text-align: center;
-        }
-        
-        #counter {
-            /* border-radius: 50%;
-            background-color: #00B285;
-            width: 15rem;
-            height: 15rem;
-            padding: 3rem;*/
-            text-align: center;
-            color: #17a2b8;
-            font-size: 10rem;
-        }
-        
-        .answer {
-            padding: 1.5rem .75rem;
-            background-color: #17a2b8;
-            border-color: #17a2b8;
-            color: white;
-        }
-        
-        #question {
-            font-size: 2rem;
-        }
-    </style>
 
 
 </head>
@@ -52,41 +20,72 @@
 <body>
 
 
-    <title>Movie Trivia</title>
-    <section class="jumbotron-fluid">
+    <title>World Geography Trivia Game</title>
+    <!--<section class="jumbotron-fluid">
         <h1 id="main-message" class="display-4">Movie Trivia</h1>
         <p class="lead">Test your knowledge of X and Y!</p>
         <button id="new-game" class="btn btn-warning">NEW GAME</button>
 
 
-    </section>
-    <main class="container canvas">
-        <div class="row justify-content-center text-center align-items-center">
-            <div class="col-sm-12 order-1 col-sm-1">
+    </section>-->
+    <main class="container canvas text-center">
+
+        <div id="instructions" class="text-center align-items-center">
+            <h1 class="title">World Geography Trivia Game</h1>
+            <p class="lead text-warning">Let's see how well you know the world.</p>
+
+        </div>
+        <div id="game" class="row justify-content-center text-center align-items-center hide">
+
+            <div class="col-sm-12  col-sm-1">
                 <p class="lead" id="question">What is the question?</p>
-            </div>
-            <div class=" col-sm-4 order-2 col-sm-2">
-                <p id="answer-1" class="answer btn btn-warning col">ANSWER 1</p>
-                <p id="answer-2" class="answer btn btn-warning col">ANSWER 2</p>
-
-            </div>
-            <div class="col-sm-4 order-4 order-sm-3">
-                <span id="counter">10</span>
-            </div>
-            <div class="col-sm-4 order-3 order-sm-4">
-                <p id="answer-3" class="answer btn btn-warning col">ANSWER 3</p>
-                <p id="answer-4" class="answer btn btn-warning col">ANSWER 4</p>
-            </div>
+                <p class="lead" id="gameplay"></p>
 
 
+            </div>
+            <h2 id="playthrough"></h2>
+
+            <!--<div class="col-sm-6">
+                <img id="image" class="img-fluid" src="" />
+            </div>-->
+
+            <div class="col-sm-12">
+                <div class="row justify-content-center text-center align-items-center">
+                    <div class="col-sm-12 ">
+                        <span id="counter"></span>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <p id="answer-1" class="answer btn btn-info col">ANSWER 1</p>
+                        <p id="answer-2" class="answer btn btn-primary col">ANSWER 2</p>
+
+                    </div>
+
+                    <div class="col-sm-4 ">
+                        <p id="answer-3" class="answer btn btn-warning col">ANSWER 3</p>
+                        <p id="answer-4" class="answer btn btn-success col">ANSWER 4</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 pl-0 pr-0">
+
+                <div class="progress mt-3">
+
+                    <div id="progress-bar" class="progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="text-center">
+            <p class="btn btn-info text-center new-game mt-3">NEW GAME</p>
         </div>
 
     </main>
 
 
-    <scrip>
+    <script>
+    </script>
 
-    </scrip>
+
 </body>
 
 </html>

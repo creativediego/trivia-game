@@ -1,16 +1,20 @@
 let trivia = {
     currentQuestion: "",
+    currentQuestionId: 0,
     currentRightAnswer: "",
     rightAnswers: 0,
     wrongAnswers: 0,
-    counter: 5,
+    counter: 10,
+    progress: 0,
     intervalId: "",
+    timeoutInterval: "",
     isAnswerChosen: false,
-    createQuestion: function(question, answer1, answer2, answer3, answer4, correctAnswer) {
+    createQuestion: function(question, answer1, answer2, answer3, answer4) {
         let thisQuestion = {
             question: question,
+            //image:
             answers: [answer1, answer2, answer3, answer4],
-            correctAnswer: correctAnswer
+            correctAnswer: answer1
         }
         this.questions.push(thisQuestion);
 
@@ -22,39 +26,104 @@ let trivia = {
     playedQuestions: [],
 
     setUpQuestions: function() {
-        this.createQuestion("what is the meaning of life?", "tacos", "beaches", "sunshine", "coding", "coding");
-        this.createQuestion("What is 2+2?", "1", "3", "4", "12", "4")
+        this.createQuestion('With over 35 million residents, what is the most populous city in the world?', "Tokyo", "Hong-Kong", "New York", "London");
+        this.createQuestion("Which scientist sailed the HMS Beagle to South America, including a stop in the Galapagos Islands?", "Charles Darwin", "Neil DeGrass Tyson", "Stephen Hawkins", "Albert Einstein");
+        this.createQuestion("Which U.S. state has the longest coastline?", "Alaska", "California", "Florida", "Hawaii");
+        this.createQuestion("What is the only sea without any coasts?", "Sargasso Sea", "Mediterranean Sea", "Black Sea", "Adriatic Sea");
+        this.createQuestion("In what country can you visit Machu Picchu?", "Peru", "Chile", "Ecuador", "Colombia");
+        this.createQuestion("What is the oldest city in the world?", "Damascus", "Jerusalem", "Athens", "Jericho");
+        this.createQuestion("Which country does the island of Tasmania belong to?", "Australia", "New Zealand", "Fiji", "Tahiti");
+        this.createQuestion("Which U.S. state has the most active volcanoes?", "Alaska", "Hawaii", "California", "Washington");
+        this.createQuestion("Which country does the dish Feijoada come from?", "Brazil", "Italy", "Spain", "Colombia");
+        this.createQuestion("What city is the capital of Australia?", "Melbourne", "Sydney", "Perth", "Brisbane")
 
     },
 
     initQuestions: function() {
-        clearInterval(trivia.intervalId);
-        this.isAnswerChosen = false;
-        this.counter = 5;
-        $("#counter").text(this.counter);
-        $("#playthrough").empty()
-        this.setCurrentQuestion();
-        this.runCounter();
-        this.checkAnswer();
+
+        if (this.isGameFinished() === false) {
+            clearInterval(trivia.intervalId);
+            clearInterval(this.timeoutInterval);
+            this.isAnswerChosen = false;
+            this.counter = 10;
+            $("#counter").text(this.counter);
+            $("#gameplay").text("");
+            this.setCurrentQuestion();
+            this.runCounter();
+            this.checkAnswer();
+
+        } else {
+
+
+            $("#question").text("Thanks for playing!")
+            $("#gameplay").text(`Correct Answers: ${this.rightAnswers} | Incorrect Answers: ${this.wrongAnswers}`)
+
+
+        }
+
+    },
+
+    newGame: function() {
+
+        clearInterval(this.timeoutInterval);
+        this.rightAnswers = 0;
+        this.wrongAnswers = 0;
+        this.progress = 0;
+        this.questions = [];
+        this.playedQuestions = [];
+        trivia.setUpQuestions();
+        trivia.initQuestions();
+        $(".new-game").css("display", "none");
+        $("#progress-bar").css("width", `${trivia.progress}%`)
+
+
+    },
+
+    fillProgressBar: function() {
+
+        trivia.progress = trivia.progress + 10;
+        $("#progress-bar").css("width", `${trivia.progress}%`)
+        $(".new-game").css("display", "block");
 
 
     },
 
     setCurrentQuestion: function() {
-        let currentQuestionId = Math.floor(Math.random() * this.questions.length)
-        this.currentQuestion = this.questions[currentQuestionId].question;
-        this.currentRightAnswer = this.questions[currentQuestionId].correctAnswer;
-        this.shuffleAnswers(this.questions[currentQuestionId].answers);
 
-        //Front end
-        $("#question").text(this.questions[currentQuestionId].question)
-        $("#answer-1").text(this.questions[currentQuestionId].answers[0])
-        $("#answer-2").text(this.questions[currentQuestionId].answers[1])
-        $("#answer-3").text(this.questions[currentQuestionId].answers[2])
-        $("#answer-4").text(this.questions[currentQuestionId].answers[3])
+        if (this.isGameFinished() === false) {
 
-        this.playedQuestions.push(this.questions[currentQuestionId])
+            do {
+                this.currentQuestionId = Math.floor(Math.random() * this.questions.length)
 
+            } while (this.playedQuestions.indexOf(this.questions[this.currentQuestionId]) !== -1)
+
+            this.currentQuestion = this.questions[this.currentQuestionId].question;
+            this.currentRightAnswer = this.questions[this.currentQuestionId].correctAnswer;
+            this.shuffleAnswers(this.questions[this.currentQuestionId].answers);
+
+            //Front end
+            $("#question").text(this.questions[this.currentQuestionId].question)
+                //$("#image").attr("src", this.questions[this.currentQuestionId].image)
+            $("#answer-1").text(this.questions[this.currentQuestionId].answers[0])
+            $("#answer-2").text(this.questions[this.currentQuestionId].answers[1])
+            $("#answer-3").text(this.questions[this.currentQuestionId].answers[2])
+            $("#answer-4").text(this.questions[this.currentQuestionId].answers[3])
+
+
+
+        }
+
+    },
+
+    isGameFinished: function() {
+
+        if (this.questions.length === this.playedQuestions.length) {
+
+            return true;
+        } else {
+
+            return false;
+        }
 
     },
 
@@ -74,24 +143,25 @@ let trivia = {
             clearInterval(trivia.intervalId);
 
 
-            if (trivia.isAnswerChosen === false) {
+            if (trivia.isAnswerChosen === false && trivia.isGameFinished() === false) {
+
 
                 if ($(this).text() === trivia.currentRightAnswer && trivia.counter > 0) {
 
-                    $("#playthrough").text("That's right!");
+                    trivia.isAnswerChosen = true;
+                    $("#question").text("That's right!");
+                    trivia.playedQuestions.push(trivia.questions[trivia.currentQuestionId])
                     trivia.rightAnswers++;
                     trivia.nextQuestion();
-                    trivia.isAnswerChosen = true;
-
-
-
-
 
                 } else {
-                    $("#playthrough").text(`Sorry, the answer was: ${trivia.currentRightAnswer}`);
+                    trivia.isAnswerChosen = true;
+                    $("#question").text(`Sorry, the answer is: ${trivia.currentRightAnswer}`);
+                    trivia.playedQuestions.push(trivia.questions[trivia.currentQuestionId])
                     trivia.wrongAnswers++;
                     trivia.nextQuestion();
-                    trivia.isAnswerChosen = true;
+
+
 
                 }
             }
@@ -123,15 +193,18 @@ let trivia = {
     stopCounter: function() {
 
         clearInterval(trivia.intervalId)
-        $("#playthrough").text(`Time's up! The answer was: ${trivia.currentRightAnswer}`)
-        this.wrongAnswers++
-            this.nextQuestion();
+
+        $("#question").text(`Time's up! Answer: ${trivia.currentRightAnswer}`)
+        this.wrongAnswers++;
+        trivia.playedQuestions.push(trivia.questions[trivia.currentQuestionId]);
+        this.nextQuestion();
     },
 
 
     nextQuestion: function() {
-
-        setTimeout(trivia.reset, 3000);
+        trivia.fillProgressBar();
+        trivia.timeoutInterval = setTimeout(trivia.reset, 3000);
+        trivia.timeoutInterval();
     },
 
     reset: function() {
@@ -142,11 +215,10 @@ let trivia = {
 }
 
 
-$("#start-game").on("click", function() {
+$(".new-game").on("click", function() {
 
-    trivia.setUpQuestions();
-    trivia.initQuestions();
-    $("#instructions").toggleClass("hide")
-    $("#game").toggleClass("hide")
+    trivia.newGame();
+    $("#instructions").css("display", "none")
+    $("#game").css("display", "block")
 
 });

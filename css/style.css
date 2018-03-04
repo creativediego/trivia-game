@@ -1,0 +1,66 @@
+body {
+    background-color: #3E53A8;
+    font-family: 'Ubuntu', sans-serif;
+    color: white;
+}
+
+.canvas {
+    padding: 5rem 6rem;
+}
+
+.title {
+    font-size: 4rem;
+}
+
+.jumbotron-fluid {
+    background-color: #17a2b8;
+    padding: 4rem;
+    color: white;
+    text-align: center;
+}
+
+#counter {
+    /* border-radius: 50%;
+    background-color: #00B285;
+    width: 15rem;
+    height: 15rem;
+    padding: 3rem;*/
+    text-align: center;
+    color: #FFBF00;
+    font-size: 5rem;
+}
+
+.answer {
+    padding: 1.5rem .75rem;
+    /*background-color: #17a2b8;
+    border-color: #17a2b8;*/
+    color: white;
+    box-shadow: 10px 10px white;
+}
+
+#question {
+    font-size: 2rem;
+}
+
+.new-game {
+    font-size: 2rem;
+}
+
+.hide {
+    display: none;
+}
+
+#instructions {
+    padding-top: 10vh;
+}
+
+#progress-bar {
+    width: 0%;
+    padding: 0;
+}
+
+#image {
+    max-height: 40vh;
+    margin-bottom: 1rem;
+    box-shadow: 10px 10px white;
+}

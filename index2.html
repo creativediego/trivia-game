@@ -12,63 +12,7 @@
     <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:700" rel="stylesheet">
     <script defer src="javascript/app.js"></script>
-    <style>
-        body {
-            background-color: #3E53A8;
-            font-family: 'Ubuntu', sans-serif;
-            color: white;
-        }
-        
-        .canvas {
-            padding: 5rem 6rem;
-        }
-        
-        .title {
-            font-size: 4rem;
-        }
-        
-        .jumbotron-fluid {
-            background-color: #17a2b8;
-            padding: 4rem;
-            color: white;
-            text-align: center;
-        }
-        
-        #counter {
-            /* border-radius: 50%;
-            background-color: #00B285;
-            width: 15rem;
-            height: 15rem;
-            padding: 3rem;*/
-            text-align: center;
-            color: #FFBF00;
-            font-size: 5rem;
-        }
-        
-        .answer {
-            padding: 1.5rem .75rem;
-            /*background-color: #17a2b8;
-            border-color: #17a2b8;*/
-            color: white;
-            box-shadow: 10px 10px white;
-        }
-        
-        #question {
-            font-size: 4rem;
-        }
-        
-        #start-game {
-            font-size: 2rem;
-        }
-        
-        .hide {
-            display: none;
-        }
-        
-        #instructions {
-            padding-top: 20vh;
-        }
-    </style>
+
 
 
 </head>
@@ -84,33 +28,55 @@
 
 
     </section>-->
-    <main class="container canvas">
+    <main class="container canvas text-center">
 
         <div id="instructions" class="text-center align-items-center">
-            <h1 class="title">Welcome to Movie Trivia!</h1>
-            <p id="start-game" class="btn btn-info">START GAME</p>
+            <h1 class="title">World Geography Trivia Game</h1>
+            <p class="lead text-warning">Let's see how well you know the world.</p>
+
         </div>
         <div id="game" class="row justify-content-center text-center align-items-center hide">
 
             <div class="col-sm-12  col-sm-1">
                 <p class="lead" id="question">What is the question?</p>
+                <p class="lead" id="gameplay"></p>
+
+
             </div>
             <h2 id="playthrough"></h2>
-            <div class="col-sm-12 ">
-                <span id="counter"></span>
+
+            <!--<div class="col-sm-6">
+                <img id="image" class="img-fluid" src="" />
+            </div>-->
+
+            <div class="col-sm-12">
+                <div class="row justify-content-center text-center align-items-center">
+                    <div class="col-sm-12 ">
+                        <span id="counter"></span>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <p id="answer-1" class="answer btn btn-info col">ANSWER 1</p>
+                        <p id="answer-2" class="answer btn btn-primary col">ANSWER 2</p>
+
+                    </div>
+
+                    <div class="col-sm-4 ">
+                        <p id="answer-3" class="answer btn btn-warning col">ANSWER 3</p>
+                        <p id="answer-4" class="answer btn btn-success col">ANSWER 4</p>
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-4 ">
-                <p id="answer-1" class="answer btn btn-info col">ANSWER 1</p>
-                <p id="answer-2" class="answer btn btn-primary col">ANSWER 2</p>
+            <div class="col-12 pl-0 pr-0">
+
+                <div class="progress mt-3">
+
+                    <div id="progress-bar" class="progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
 
             </div>
-
-            <div class="col-sm-4 ">
-                <p id="answer-3" class="answer btn btn-warning col">ANSWER 3</p>
-                <p id="answer-4" class="answer btn btn-success col">ANSWER 4</p>
-            </div>
-
-
+        </div>
+        <div class="text-center">
+            <p class="btn btn-info text-center new-game mt-3">NEW GAME</p>
         </div>
 
     </main>
