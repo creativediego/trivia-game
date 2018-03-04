@@ -4,6 +4,9 @@ let trivia = {
     currentRightAnswer: "",
     rightAnswers: 0,
     wrongAnswers: 0,
+    rightImages: ["https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif", "https://media.giphy.com/media/pNpONEEg3pLIQ/giphy.gif", "https://media.giphy.com/media/JVdF14CQQH7gs/giphy.gif", "https://media.giphy.com/media/5wWf7GW1AzV6pF3MaVW/giphy.gif", "https://media.giphy.com/media/3o85xr46bezqkTazsc/giphy.gif", "https://media.giphy.com/media/ar4x1w44umngk/giphy.gif"],
+    wrongImages: ["https://media.giphy.com/media/3oFyDpijVlI0bSoB8Y/giphy.gif", "https://media.giphy.com/media/11KHdttFOVlzxe/giphy.gif", "https://media.giphy.com/media/tf9j98QUJrdAs/giphy.gif", "https://media.giphy.com/media/4OJFCEeGzYGs0/giphy.gif", "https://media.giphy.com/media/ceeN6U57leAhi/giphy.gif", "https://media.giphy.com/media/xUOwG7XGOOyyP8jLGg/giphy.gif", "https://media.giphy.com/media/i1JSXl0MfeRd6/giphy.gif", "https://media.giphy.com/media/3o7btT1T9qpQZWhNlK/giphy.gif"],
+    timeUpImages: ["https://media.giphy.com/media/3iUMl1Fh6HRew/giphy.gif", "https://media.giphy.com/media/xUySTEJYS5F1Cayg92/giphy.gif", "https://media.giphy.com/media/xUOxfb3UW3H12DJ7m8/giphy.gif", "https://media.giphy.com/media/l0MYOUI5XfRk4LLWM/giphy.gif", "https://media.giphy.com/media/bWM2eWYfN3r20/giphy.gif", "https://media.giphy.com/media/11rIergnpiYpvW/giphy.gif"],
     counter: 10,
     progress: 0,
     intervalId: "",
@@ -48,6 +51,7 @@ let trivia = {
             this.counter = 10;
             $("#counter").text(this.counter);
             $("#gameplay").text("");
+            $("#image").attr("src", "");
             this.setCurrentQuestion();
             this.runCounter();
             this.checkAnswer();
@@ -56,6 +60,7 @@ let trivia = {
 
 
             $("#question").text("Thanks for playing!")
+            $("#image").attr("src", "https://media.giphy.com/media/nU704Y2jeFOHm/giphy.gif");
             $("#gameplay").text(`Correct Answers: ${this.rightAnswers} | Incorrect Answers: ${this.wrongAnswers}`)
 
 
@@ -73,6 +78,7 @@ let trivia = {
         this.playedQuestions = [];
         trivia.setUpQuestions();
         trivia.initQuestions();
+        $("#image").attr("src", "");
         $(".new-game").css("display", "none");
         $("#progress-bar").css("width", `${trivia.progress}%`)
 
@@ -150,6 +156,7 @@ let trivia = {
 
                     trivia.isAnswerChosen = true;
                     $("#question").text("That's right!");
+                    $("#image").attr("src", trivia.rightImages[Math.floor(Math.random() * trivia.rightImages.length)]);
                     trivia.playedQuestions.push(trivia.questions[trivia.currentQuestionId])
                     trivia.rightAnswers++;
                     trivia.nextQuestion();
@@ -157,6 +164,7 @@ let trivia = {
                 } else {
                     trivia.isAnswerChosen = true;
                     $("#question").text(`Sorry, the answer is: ${trivia.currentRightAnswer}`);
+                    $("#image").attr("src", trivia.wrongImages[Math.floor(Math.random() * trivia.wrongImages.length)]);
                     trivia.playedQuestions.push(trivia.questions[trivia.currentQuestionId])
                     trivia.wrongAnswers++;
                     trivia.nextQuestion();
@@ -197,14 +205,15 @@ let trivia = {
         $("#question").text(`Time's up! Answer: ${trivia.currentRightAnswer}`)
         this.wrongAnswers++;
         trivia.playedQuestions.push(trivia.questions[trivia.currentQuestionId]);
+        $("#image").attr("src", trivia.timeUpImages[Math.floor(Math.random() * trivia.timeUpImages.length)]);
         this.nextQuestion();
     },
 
 
     nextQuestion: function() {
         trivia.fillProgressBar();
-        trivia.timeoutInterval = setTimeout(trivia.reset, 3000);
-        trivia.timeoutInterval();
+        trivia.timeoutInterval = setTimeout(trivia.reset, 4000);
+        trivia.timeoutInterval;
     },
 
     reset: function() {
