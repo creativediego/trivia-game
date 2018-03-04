@@ -212,7 +212,7 @@ let trivia = {
 
     nextQuestion: function() {
         trivia.fillProgressBar();
-        trivia.timeoutInterval = setTimeout(trivia.reset, 5000);
+        trivia.timeoutInterval = setTimeout(trivia.reset, 3000);
         trivia.timeoutInterval;
     },
 
