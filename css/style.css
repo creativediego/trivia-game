@@ -64,3 +64,25 @@ body {
     margin-bottom: 1rem;
     box-shadow: 10px 10px white;
 }
+
+@media only screen and (max-width: 767px) {
+    .title {
+        font-size: 2rem;
+    }
+    #question {
+        font-size: 1.5rem;
+    }
+    .canvas {
+        padding: 2rem 3rem;
+    }
+    .new-game {
+        font-size: 1rem;
+    }
+    #counter {
+        font-size: 3rem;
+    }
+    .answer {
+        padding: 1rem .75rem;
+        font-size: .75rem;
+    }
+}
