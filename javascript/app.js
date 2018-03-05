@@ -60,7 +60,8 @@ let trivia = {
 
 
             $("#question").text("Thanks for playing!")
-                //$("#image").attr("src", "https://media.giphy.com/media/nU704Y2jeFOHm/giphy.gif");
+            $(".new-game").css("display", "block");
+            //$("#image").attr("src", "https://media.giphy.com/media/nU704Y2jeFOHm/giphy.gif");
             $("#gameplay").text(`Correct Answers: ${this.rightAnswers} | Incorrect Answers: ${this.wrongAnswers}`)
 
 
@@ -89,7 +90,7 @@ let trivia = {
 
         trivia.progress = trivia.progress + 10;
         $("#progress-bar").css("width", `${trivia.progress}%`)
-        $(".new-game").css("display", "block");
+
 
 
     },
